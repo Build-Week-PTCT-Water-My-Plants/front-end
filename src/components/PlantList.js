@@ -1,5 +1,6 @@
 import React from "react";
 
+//map over GET request from server to render individual <Plant /> components here
 const PlantList = () => {
   return (
     <div className="plantlist">
