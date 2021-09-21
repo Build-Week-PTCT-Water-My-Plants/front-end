@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import PlantList from "./components/PlantList";
 import PlantForm from "./components/PlantForm";
+import { connect } from "react-redux";
 
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { green } from "@material-ui/core/colors";
@@ -21,13 +22,13 @@ const theme = createTheme({
   },
 });
 
-function App() {
+function App(props) {
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <div className="App">
           <Nav />
-          <SideNav />
+          {props.showSideNav && <SideNav />}
 
           <Switch>
             <Route exact path="/" component={Landing} />
@@ -42,4 +43,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    showSideNav: state.showSideNav,
+  };
+};
+
+export default connect(mapStateToProps, {})(App);

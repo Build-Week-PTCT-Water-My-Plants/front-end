@@ -7,27 +7,37 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import { AddCircleOutlined, SubjectOutlined } from "@material-ui/icons";
+import { AddCircleOutlined, LocalFloristOutlined } from "@material-ui/icons";
 import { useHistory, useLocation } from "react-router";
 import { makeStyles } from "@material-ui/core";
 
-export const drawerWidth = 240;
+export const drawerWidth = 220;
 
-// const useStyles = makeStyles((theme) => {
-//     return {
-//         drawer: {
-//             width: drawerWidth,
-//         },
-//     }
-// })
+const useStyles = makeStyles((theme) => {
+  return {
+    drawer: {
+      width: drawerWidth,
+    },
+    drawerPaper: {
+      width: drawerWidth,
+    },
+    active: {
+      background: "#f4f4f4",
+    },
+    title: {
+      padding: theme.spacing(2),
+    },
+  };
+});
 
 const SideNav = () => {
+  const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
   const menuItems = [
     {
       text: "My Plants",
-      icon: <SubjectOutlined color="secondary" />,
+      icon: <LocalFloristOutlined color="secondary" />,
       path: "/plants",
     },
     {
@@ -38,14 +48,22 @@ const SideNav = () => {
   ];
 
   return (
-    <Drawer variant="permanent" anchor="left">
+    <Drawer
+      variant="permanent"
+      anchor="left"
+      className={classes.drawer}
+      classes={{ paper: classes.drawerPaper }}
+    >
       <div>
-        <Typography variant="h5">Water My Plants</Typography>
+        <Typography className={classes.title} variant="h5">
+          Water My Plants
+        </Typography>
       </div>
 
       <List>
         {menuItems.map((item) => (
           <ListItem
+            className={location.pathname === item.path ? classes.active : null}
             key={item.text}
             button
             onClick={() => history.push(item.path)}
