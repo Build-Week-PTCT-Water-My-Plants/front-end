@@ -1,7 +1,11 @@
 import React from "react";
 
 const Nav = () => {
-  return <h3>Nav</h3>;
+  return (
+    <header>
+      <h3>AppBar</h3>
+    </header>
+  );
 };
 
 export default Nav;
