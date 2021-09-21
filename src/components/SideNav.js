@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 //MUI imports
 import Typography from "@material-ui/core/Typography";
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-const SideNav = () => {
+const SideNav = (props) => {
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
@@ -60,21 +61,31 @@ const SideNav = () => {
         </Typography>
       </div>
 
-      <List>
-        {menuItems.map((item) => (
-          <ListItem
-            className={location.pathname === item.path ? classes.active : null}
-            key={item.text}
-            button
-            onClick={() => history.push(item.path)}
-          >
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} />
-          </ListItem>
-        ))}
-      </List>
+      {props.isLoggedIn && (
+        <List>
+          {menuItems.map((item) => (
+            <ListItem
+              className={
+                location.pathname === item.path ? classes.active : null
+              }
+              key={item.text}
+              button
+              onClick={() => history.push(item.path)}
+            >
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItem>
+          ))}
+        </List>
+      )}
     </Drawer>
   );
 };
 
-export default SideNav;
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.isLoggedIn,
+  };
+};
+
+export default connect(mapStateToProps, {})(SideNav);

@@ -22,13 +22,13 @@ const theme = createTheme({
   },
 });
 
-function App(props) {
+function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <div className="App">
           <Nav />
-          {props.isLoggedIn && <SideNav />}
+          <SideNav />
 
           <Switch>
             <Route exact path="/" component={Landing} />
