@@ -12,7 +12,7 @@ import { AddCircleOutlined, LocalFloristOutlined } from "@material-ui/icons";
 import { useHistory, useLocation } from "react-router";
 import { makeStyles } from "@material-ui/core";
 
-export const drawerWidth = 220;
+export const drawerWidth = 210;
 
 const useStyles = makeStyles((theme) => {
   return {

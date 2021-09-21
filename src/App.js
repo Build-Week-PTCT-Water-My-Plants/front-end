@@ -10,7 +10,7 @@ import PlantList from "./components/PlantList";
 import PlantForm from "./components/PlantForm";
 import { connect } from "react-redux";
 
-import { createTheme, ThemeProvider } from "@material-ui/core";
+import { createTheme, ThemeProvider, makeStyles } from "@material-ui/core";
 import { green } from "@material-ui/core/colors";
 
 const theme = createTheme({
@@ -22,7 +22,18 @@ const theme = createTheme({
   },
 });
 
+const useStyles = makeStyles((theme) => {
+  return {
+    components: {
+      width: "100%",
+      padding: theme.spacing(3),
+    },
+    spacer: theme.mixins.toolbar,
+  };
+});
+
 function App() {
+  const classes = useStyles();
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -30,13 +41,17 @@ function App() {
           <Nav />
           <SideNav />
 
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/plants" component={PlantList} />
-            <Route path="/plantform" component={PlantForm} />
-          </Switch>
+          <div className={classes.components}>
+            <div className={classes.spacer}></div>
+
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route path="/plants" component={PlantList} />
+              <Route path="/plantform" component={PlantForm} />
+            </Switch>
+          </div>
         </div>
       </Router>
     </ThemeProvider>
