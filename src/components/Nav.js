@@ -1,11 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
 
 const Nav = () => {
   return (
-    <header>
-      <h3>AppBar</h3>
-    </header>
+    <AppBar elevation={0}>
+      <Toolbar></Toolbar>
+    </AppBar>
   );
 };
 
-export default Nav;
+export default connect()(Nav);

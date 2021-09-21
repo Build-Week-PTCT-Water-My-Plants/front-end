@@ -28,7 +28,7 @@ function App(props) {
       <Router>
         <div className="App">
           <Nav />
-          {props.showSideNav && <SideNav />}
+          {props.isLoggedIn && <SideNav />}
 
           <Switch>
             <Route exact path="/" component={Landing} />
@@ -45,7 +45,7 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return {
-    showSideNav: state.showSideNav,
+    isLoggedIn: state.isLoggedIn,
   };
 };
 

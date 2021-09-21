@@ -1,7 +1,7 @@
-export const TOGGLE_SIDE_NAV = "TOGGLE_SIDE_NAV";
+export const SET_LOGGED_IN = "SET_LOGGED_IN";
 
-export const toggleSideNav = () => {
+export const setLoggedIn = () => {
   return {
-    type: TOGGLE_SIDE_NAV,
+    type: SET_LOGGED_IN,
   };
 };
