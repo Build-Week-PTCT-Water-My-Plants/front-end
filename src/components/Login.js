@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
-const initialData = {
+const initialLoginData = {
   username: "",
   password: "",
 }
 
-const initialErrors = {
+const initialLoginErrors = {
   username: "",
   password: "",
 }
@@ -14,9 +14,9 @@ const initialErrors = {
 
 const Login = () => {
 
-  const [formData, setFormData] = useState(initialData);
-  const [errors, setErrors] = useState(initialErrors);
-  const [disabled, setDisabled] = useState(true);
+  const [loginData, setLoginData] = useState(initialLoginData);
+  const [loginErrors, setLoginErrors] = useState(initialLoginErrors);
+  const [loginDisabled, setLoginDisabled] = useState(true);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ const Login = () => {
   const formSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("", formData)
+      .post("", loginData)
       .then(res => {
         console.log(res)
       })
@@ -35,8 +35,8 @@ const Login = () => {
 
   const onChange = (e) => {
     e.preventDefault();
-    console.log(formData);
-    setFormData(initialData)
+    console.log(loginData);
+    setLoginData(initialLoginData)
   }
 
   useEffect(() => {
@@ -49,26 +49,31 @@ const Login = () => {
       <div className="login">
         
         <h3>Login</h3>
-          <label>username:</label>
+          <label>Username:</label>
             <input
               type = "text"
               name = "username"
-              value = { formData.username }
+              value = { loginData.username }
               onChange = { onChange }
               />
+              <br/>
 
-          <label>password:</label>
+          <label>Password:</label>
           <input
             type = "password"
             name = "pasword"
-            value = { formData.password }
+            value = { loginData.password }
             onChange = { onChange }
           />
+          <br/>
 
+        <div>
+          <br/>
           <button
             type = "submit"
             name = "submit"
-            disabled = {disabled}>submit</button>
+            disabled = {loginDisabled}>Submit</button>
+            </div>
       </div>
     </form>
 
