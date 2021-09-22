@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Container from "@material-ui/core/Container";
 import Plant from "./Plant";
@@ -12,6 +12,11 @@ const PlantList = (props) => {
     1100: 2,
     700: 1,
   };
+
+  //write reducer case for this using an axios request to set plants state
+  useEffect(() => {
+    console.log("PlantList loaded!");
+  }, []);
 
   return (
     <Container>
