@@ -26,7 +26,7 @@ const Login = () => {
   const formSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("", loginData)
+      .post("", initialLoginData)
       .then(res => {
         console.log(res)
       })
@@ -35,7 +35,7 @@ const Login = () => {
 
   const onChange = (e) => {
     e.preventDefault();
-    console.log(loginData);
+    console.log(initialLoginData);
     setLoginData(initialLoginData)
   }
 
@@ -45,7 +45,7 @@ const Login = () => {
 
   return (
 
-    <form>
+    <form onSubmit = { formSubmit }>
       <div className="login">
         
         <h3>Login</h3>
@@ -53,7 +53,7 @@ const Login = () => {
             <input
               type = "text"
               name = "username"
-              value = { loginData.username }
+              value = { initialLoginData.username }
               onChange = { onChange }
               />
               <br/>

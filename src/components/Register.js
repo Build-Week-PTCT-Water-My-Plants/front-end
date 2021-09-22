@@ -25,13 +25,10 @@ const Register = () => {
   const [regErrors, setRegErrors] = useState(initialErrorState);
   const [regDisabled, setRegDisabled] = useState(true);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    formSubmit();
-  }
 
   const formSubmit = (e) => {
     e.preventDefault();
+    console.log("Submit Function", regFormData);
     axios
       .post("", regFormData)
       .then(res => {
@@ -40,66 +37,73 @@ const Register = () => {
       .catch(err => console.log("Error, err"))
   }
 
-  const onChange = (e) => {
-    e.preventDefault();
-    console.log(regFormData);
-    setRegFormData(initialState)
+  const onChange = (e) => { 
+    //console.log(regFormData);
+    setRegFormData({...regFormData, [e.target.name]: e.target.value})
   }
 
-  useEffect(() => {
-
-  })
 
   return (
-    <div className="register">
 
-      <h3>Register</h3>
-        <label>First Name:</label>
+    <form onSubmit = { formSubmit }>
+      <div className="register">
+
+        <h3>Register</h3>
+          <label>First Name:</label>
           <input 
-          
+            type = "text"
+            name = "firstname"
+            value = { regFormData.firstname }
+            onChange = { onChange }
           />
            <br/>
 
-      <label>Last Name:</label>
+        <label>Last Name:</label>
           <input 
-          
+            type = "text"
+            name = "lastname"
+            value = { regFormData.lastname }
+            onChange = { onChange }
+          />
+          <br/>
 
+        <label>Username:</label>
+          <input 
+          type = "text"
+          name = "username"
+          value = { regFormData.username }
+          onChange = { onChange }  
           />
            <br/>
 
-      <label>Username:</label>
+        <label>Email:</label>
           <input 
-          
+          type = "text"
+          name = "email"
+          value = { regFormData.email }
+          onChange = { onChange }
           />
            <br/>
 
-      <label>Email:</label>
+        <label>Password:</label>
           <input 
-          
+          type = "text"
+          name = "password"
+          value = { regFormData.password}
+          onChange = { onChange }
           />
            <br/>
 
-      <label>Password:</label>
-          <input 
-          
-          />
-           <br/>
-
-      <label>Confirm Password:</label>
-          <input 
-          
-          />
-           <br/>
-
-      <div>
+        <div>
           <br/>
           <button
             type = "submit"
             name = "submit"
-            disabled = {setRegDisabled}>Submit</button>
+            >Submit</button>
             </div>
 
     </div>
+    </form>
   );
 };
 
