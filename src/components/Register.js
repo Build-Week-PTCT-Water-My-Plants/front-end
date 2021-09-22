@@ -29,12 +29,7 @@ const Register = () => {
   const formSubmit = (e) => {
     e.preventDefault();
     console.log("Submit Function", regFormData);
-    axios
-      .post("", regFormData)
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => console.log("Error, err"))
+   
   }
 
   const onChange = (e) => { 
@@ -98,8 +93,7 @@ const Register = () => {
           <br/>
           <button
             type = "submit"
-            name = "submit"
-            >Submit</button>
+            name = "submit">Submit</button>
             </div>
 
     </div>

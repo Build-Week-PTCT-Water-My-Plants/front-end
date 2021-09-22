@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
-const initialLoginData = {
+const initialData = {
   username: "",
   password: "",
 }
 
-const initialLoginErrors = {
+const initialErrors = {
   username: "",
   password: "",
 }
@@ -14,34 +14,21 @@ const initialLoginErrors = {
 
 const Login = () => {
 
-  const [loginData, setLoginData] = useState(initialLoginData);
-  const [loginErrors, setLoginErrors] = useState(initialLoginErrors);
+  const [loginData, setLoginData] = useState(initialData);
+  const [loginErrors, setLoginErrors] = useState(initialErrors);
   const [loginDisabled, setLoginDisabled] = useState(true);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    formSubmit();
-  }
 
   const formSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("", initialLoginData)
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => console.log("Error, err"))
+    console.log("Submit Function", loginData);
+    
   }
 
   const onChange = (e) => {
-    e.preventDefault();
-    console.log(initialLoginData);
-    setLoginData(initialLoginData)
+    console.log(loginData);
+    setLoginData({...loginData, [e.target.name]: e.target.value})
   }
-
-  useEffect(() => {
-
-  })
 
   return (
 
@@ -53,7 +40,7 @@ const Login = () => {
             <input
               type = "text"
               name = "username"
-              value = { initialLoginData.username }
+              value = { loginData.username }
               onChange = { onChange }
               />
               <br/>
@@ -71,8 +58,7 @@ const Login = () => {
           <br/>
           <button
             type = "submit"
-            name = "submit"
-            disabled = {loginDisabled}>Submit</button>
+            name = "submit">Submit</button>
             </div>
       </div>
     </form>
