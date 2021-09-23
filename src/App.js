@@ -3,12 +3,11 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
 import SideNav from "./components/SideNav";
-import Landing from "./components/Landing";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import PlantList from "./components/PlantList";
 import PlantForm from "./components/PlantForm";
-import { connect } from "react-redux";
+import PrivateRoute from "./components/PrivateRoute";
 
 import { createTheme, ThemeProvider, makeStyles } from "@material-ui/core";
 import { green } from "@material-ui/core/colors";
@@ -48,8 +47,8 @@ function App() {
               <Route exact path="/" component={Login} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              <Route path="/plants" component={PlantList} />
-              <Route path="/plantform" component={PlantForm} />
+              <PrivateRoute path="/plants" component={PlantList} />
+              <PrivateRoute path="/plantform" component={PlantForm} />
             </Switch>
           </div>
         </div>
@@ -58,10 +57,4 @@ function App() {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isLoggedIn: state.isLoggedIn,
-  };
-};
-
-export default connect(mapStateToProps, {})(App);
+export default App;

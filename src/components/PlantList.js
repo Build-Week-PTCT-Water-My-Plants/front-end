@@ -5,11 +5,11 @@ import Container from "@material-ui/core/Container";
 import Plant from "./Plant";
 import Masonry from "react-masonry-css";
 import { connect } from "react-redux";
-import { getPlants } from "../actions";
+import { getPlants, setLoggedIn } from "../actions";
 
 //map over GET request from server to render individual <Plant /> components here
 const PlantList = (props) => {
-  const { plants, getPlants, loadingPlants, plantsError } = props;
+  const { plants, getPlants, loadingPlants, plantsError, setLoggedIn } = props;
 
   const breakpoints = {
     default: 3,
@@ -19,8 +19,9 @@ const PlantList = (props) => {
 
   useEffect(() => {
     console.log("PlantList route loaded!");
+    setLoggedIn();
     getPlants();
-  }, [getPlants]);
+  }, [getPlants, setLoggedIn]);
 
   return (
     <Container>
@@ -53,4 +54,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getPlants })(PlantList);
+export default connect(mapStateToProps, { getPlants, setLoggedIn })(PlantList);
