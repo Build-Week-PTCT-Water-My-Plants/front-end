@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import FadeLoader from "react-spinners/FadeLoader";
 
 import Container from "@material-ui/core/Container";
 import Plant from "./Plant";
@@ -8,14 +9,14 @@ import { getPlants } from "../actions";
 
 //map over GET request from server to render individual <Plant /> components here
 const PlantList = (props) => {
-  const { plants, getPlants } = props;
+  const { plants, getPlants, loadingPlants } = props;
+
   const breakpoints = {
     default: 3,
     1100: 2,
     700: 1,
   };
 
-  //write reducer case for this using an axios request to set plants state
   useEffect(() => {
     console.log("PlantList route loaded!");
     getPlants();
@@ -23,6 +24,11 @@ const PlantList = (props) => {
 
   return (
     <Container>
+      {loadingPlants && (
+        <div className="loader">
+          <FadeLoader size={150} />
+        </div>
+      )}
       <Masonry
         breakpointCols={breakpoints}
         className="my-masonry-grid"
@@ -41,6 +47,7 @@ const PlantList = (props) => {
 const mapStateToProps = (state) => {
   return {
     plants: state.plants,
+    loadingPlants: state.loadingPlants,
   };
 };
 

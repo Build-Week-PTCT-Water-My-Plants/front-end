@@ -32,3 +32,9 @@ body {
   /* change div to reference your elements you put in <Masonry> */
   margin-bottom: 30px;
 }
+
+.loader {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
