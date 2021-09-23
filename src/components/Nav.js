@@ -32,9 +32,9 @@ const Nav = (props) => {
     props.setLoggedOut();
     history.push("/login");
   };
-  const login = () => {
+  const register = () => {
     console.log("Logging in...");
-    props.setLoggedIn();
+    history.push("/register");
   };
   return (
     <AppBar className={classes.appbar} elevation={0} color="secondary">
@@ -53,8 +53,8 @@ const Nav = (props) => {
             Logout
           </Button>
         ) : (
-          <Button onClick={login} color="primary" variant="contained">
-            Login
+          <Button onClick={register} color="primary" variant="contained">
+            Register New Account
           </Button>
         )}
       </Toolbar>

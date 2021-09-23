@@ -45,7 +45,7 @@ function App() {
             <div className={classes.spacer}></div>
 
             <Switch>
-              <Route exact path="/" component={Landing} />
+              <Route exact path="/" component={Login} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <Route path="/plants" component={PlantList} />
