@@ -38,3 +38,8 @@ body {
   justify-content: center;
   margin-top: 100px;
 }
+
+.plantsError {
+  margin: 0 auto;
+  color: darkred;
+}

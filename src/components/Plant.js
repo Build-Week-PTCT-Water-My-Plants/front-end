@@ -5,14 +5,17 @@ import IconButton from "@material-ui/core/IconButton";
 import { DeleteOutlined, EditOutlined } from "@material-ui/icons";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import { connect } from "react-redux";
+import { deletePlant } from "../actions";
 
-const Plant = ({ plant }) => {
+const Plant = ({ plant, deletePlant }) => {
   const handleEdit = () => {
     console.log("Editing: ", plant.id);
   };
 
   const handleDelete = () => {
     console.log("Deleting: ", plant.id);
+    deletePlant(plant.id);
   };
 
   return (
@@ -45,4 +48,8 @@ const Plant = ({ plant }) => {
   );
 };
 
-export default Plant;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+export default connect(mapStateToProps, { deletePlant })(Plant);

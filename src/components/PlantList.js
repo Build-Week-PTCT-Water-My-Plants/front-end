@@ -9,7 +9,7 @@ import { getPlants } from "../actions";
 
 //map over GET request from server to render individual <Plant /> components here
 const PlantList = (props) => {
-  const { plants, getPlants, loadingPlants } = props;
+  const { plants, getPlants, loadingPlants, plantsError } = props;
 
   const breakpoints = {
     default: 3,
@@ -29,6 +29,7 @@ const PlantList = (props) => {
           <FadeLoader size={150} />
         </div>
       )}
+      {plantsError && <h3 className="plantsError">{plantsError}</h3>}
       <Masonry
         breakpointCols={breakpoints}
         className="my-masonry-grid"
@@ -48,6 +49,7 @@ const mapStateToProps = (state) => {
   return {
     plants: state.plants,
     loadingPlants: state.loadingPlants,
+    plantsError: state.plantsError,
   };
 };
 
