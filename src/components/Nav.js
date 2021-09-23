@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { setLoggedIn } from "../actions";
 import { makeStyles } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -28,6 +29,7 @@ const Nav = (props) => {
   };
   const login = () => {
     console.log("Logging in...");
+    props.setLoggedIn();
   };
   return (
     <AppBar className={classes.appbar} elevation={0} color="secondary">
@@ -61,4 +63,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(Nav);
+export default connect(mapStateToProps, { setLoggedIn })(Nav);

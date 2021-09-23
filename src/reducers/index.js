@@ -1,46 +1,60 @@
-import { SET_LOGGED_IN } from "../actions";
-
-//Temporary data to get started
-const initialPlants = [
-  {
-    id: 1,
-    nickname: "Fred",
-    species: "Dragon Tree",
-    h2oFrequency: "Once a week",
-    description:
-      "Fred looks like a miniature palm tree, and is still alive after three years so lets count that as a win",
-  },
-  {
-    id: 2,
-    nickname: "Susan",
-    species: "Fiddle Leaf Fig",
-    h2oFrequency: "Twice per week",
-    description:
-      "Homeowners rely on Ficus lyrata to provide a fresh, modern twist in their decor, even in smaller spaces. Natural light is important for the large leaves to engage in photosynthesis, so place it close to a south or east-facing window. Allow soil to dry between waterings.",
-  },
-  {
-    id: 3,
-    nickname: "Bob",
-    species: "Spider Plant",
-    h2oFrequency: "Every two weeks",
-    description:
-      "Chlorophytum comosum has been a popular houseplant for decades, but this throwback plant is still relevant in any setting where you desire a low maintenance specimen that also purifies the air. The arching leaves make these plants great for pedestals or hanging baskets.",
-  },
-];
+import {
+  DELETE_PLANT_FAIL,
+  DELETE_PLANT_START,
+  DELETE_PLANT_SUCCESS,
+  GET_PLANTS_FAIL,
+  GET_PLANTS_START,
+  GET_PLANTS_SUCCESS,
+  SET_LOGGED_IN,
+} from "../actions";
 
 const initialState = {
-  plants: initialPlants,
-  hasAccount: false,
-  isLoggedIn: true,
+  plants: [],
+  isLoggedIn: false,
+  loadingPlants: false,
+  plantsError: "",
+  deletingPlant: false,
+  deletePlantError: "",
 };
 
 export const appReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_LOGGED_IN:
       return { ...state, isLoggedIn: true };
+    case GET_PLANTS_START:
+      return { ...state, loadingPlants: true };
+    case GET_PLANTS_SUCCESS:
+      return {
+        ...state,
+        plants: action.payload,
+        loadingPlants: false,
+      };
+    case GET_PLANTS_FAIL:
+      return {
+        ...state,
+        plantsError: "loading plants failed, please try again",
+        loadingPlants: false,
+      };
+    case DELETE_PLANT_START:
+      return {
+        ...state,
+        deletingPlant: true,
+      };
+    case DELETE_PLANT_SUCCESS:
+      return {
+        ...state,
+        plants: state.plants.filter((plant) => action.payload !== plant.id),
+        deletingPlant: false,
+      };
+    case DELETE_PLANT_FAIL:
+      return {
+        ...state,
+        deletePlantError: "error, cannot delete...please try again",
+        deletingPlant: false,
+      };
     //default case starter
     default:
-      //   console.log("Error: unknown action type");
+      // console.log("Error: unknown action type");
       return state;
   }
 };
