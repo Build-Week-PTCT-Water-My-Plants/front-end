@@ -4,9 +4,11 @@ import Container from "@material-ui/core/Container";
 import Plant from "./Plant";
 import Masonry from "react-masonry-css";
 import { connect } from "react-redux";
+import { getPlants } from "../actions";
 
 //map over GET request from server to render individual <Plant /> components here
 const PlantList = (props) => {
+  const { plants, getPlants } = props;
   const breakpoints = {
     default: 3,
     1100: 2,
@@ -15,8 +17,9 @@ const PlantList = (props) => {
 
   //write reducer case for this using an axios request to set plants state
   useEffect(() => {
-    console.log("PlantList loaded!");
-  }, []);
+    console.log("PlantList route loaded!");
+    getPlants();
+  }, [getPlants]);
 
   return (
     <Container>
@@ -25,7 +28,7 @@ const PlantList = (props) => {
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {props.plants.map((plant) => (
+        {plants.map((plant) => (
           <div key={plant.id}>
             <Plant plant={plant} />
           </div>
@@ -41,4 +44,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(PlantList);
+export default connect(mapStateToProps, { getPlants })(PlantList);
