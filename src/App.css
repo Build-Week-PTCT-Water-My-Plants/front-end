@@ -43,3 +43,7 @@ body {
   margin: 0 auto;
   color: darkred;
 }
+
+.deletePlantError {
+  color: darkred;
+}

@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { deletePlant } from "../actions";
 
-const Plant = ({ plant, deletePlant }) => {
+const Plant = ({ plant, deletePlant, deletePlantError }) => {
   const handleEdit = () => {
     console.log("Editing: ", plant.id);
   };
@@ -20,6 +20,9 @@ const Plant = ({ plant, deletePlant }) => {
 
   return (
     <div className="plant">
+      {deletePlantError && (
+        <h5 className="deletePlantError">{deletePlantError}</h5>
+      )}
       <Card elevation={1}>
         <CardHeader
           title={plant.nickname}
@@ -49,7 +52,9 @@ const Plant = ({ plant, deletePlant }) => {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    deletePlantError: state.deletePlantError,
+  };
 };
 
 export default connect(mapStateToProps, { deletePlant })(Plant);
