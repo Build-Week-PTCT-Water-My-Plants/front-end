@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setLoggedIn } from "../actions";
+import { setLoggedIn, setLoggedOut } from "../actions";
 import { makeStyles } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -9,6 +9,7 @@ import SpaOutlined from "@material-ui/icons/SpaOutlined";
 import Button from "@material-ui/core/Button";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import { drawerWidth } from "./SideNav";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -24,12 +25,16 @@ const useStyles = makeStyles((theme) => {
 
 const Nav = (props) => {
   const classes = useStyles();
+  const history = useHistory();
   const logout = () => {
     console.log("Logging out...");
+    localStorage.removeItem("token");
+    props.setLoggedOut();
+    history.push("/login");
   };
-  const login = () => {
+  const register = () => {
     console.log("Logging in...");
-    props.setLoggedIn();
+    history.push("/register");
   };
   return (
     <AppBar className={classes.appbar} elevation={0} color="secondary">
@@ -48,8 +53,8 @@ const Nav = (props) => {
             Logout
           </Button>
         ) : (
-          <Button onClick={login} color="primary" variant="contained">
-            Login
+          <Button onClick={register} color="primary" variant="contained">
+            Register New Account
           </Button>
         )}
       </Toolbar>
@@ -63,4 +68,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setLoggedIn })(Nav);
+export default connect(mapStateToProps, { setLoggedIn, setLoggedOut })(Nav);

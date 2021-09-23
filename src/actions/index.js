@@ -2,6 +2,7 @@ import axios from "axios";
 import dummyData from "../data/dummyData";
 
 export const SET_LOGGED_IN = "SET_LOGGED_IN";
+export const SET_LOGGED_OUT = "SET_LOGGED_OUT";
 
 export const GET_PLANTS_START = "GET_PLANTS_START";
 export const GET_PLANTS_SUCCESS = "GET_PLANTS_SUCCESS";
@@ -15,6 +16,10 @@ export const setLoggedIn = () => {
   return {
     type: SET_LOGGED_IN,
   };
+};
+
+export const setLoggedOut = () => {
+  return { type: SET_LOGGED_OUT };
 };
 
 export const getPlants = () => (dispatch) => {

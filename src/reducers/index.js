@@ -6,6 +6,7 @@ import {
   GET_PLANTS_START,
   GET_PLANTS_SUCCESS,
   SET_LOGGED_IN,
+  SET_LOGGED_OUT,
 } from "../actions";
 
 const initialState = {
@@ -15,12 +16,15 @@ const initialState = {
   plantsError: "",
   deletingPlant: false,
   deletePlantError: "",
+  loadingLogin: false,
 };
 
 export const appReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_LOGGED_IN:
       return { ...state, isLoggedIn: true };
+    case SET_LOGGED_OUT:
+      return { ...state, isLoggedIn: false };
     case GET_PLANTS_START:
       return { ...state, loadingPlants: true };
     case GET_PLANTS_SUCCESS:
