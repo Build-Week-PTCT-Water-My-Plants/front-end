@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
-import { setLoggedIn, addPlant } from "../actions";
+import { setLoggedIn, addPlant, unsetEditing } from "../actions";
 import { Typography, Button, Container } from "@material-ui/core/";
 import { AddCircle } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/";
@@ -29,7 +29,7 @@ const intiialFormValues = {
   description: "",
 };
 
-const PlantForm = ({ setLoggedIn, addPlant }) => {
+const PlantForm = ({ setLoggedIn, addPlant, isEditing, unsetEditing }) => {
   const classes = useStyles();
 
   const [formValues, setFormValues] = useState(intiialFormValues);
@@ -50,6 +50,11 @@ const PlantForm = ({ setLoggedIn, addPlant }) => {
     push("/plants");
   };
 
+  const handleCancel = () => {
+    unsetEditing();
+    push("/plants");
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setLoggedIn();
@@ -64,7 +69,7 @@ const PlantForm = ({ setLoggedIn, addPlant }) => {
         color="textSecondary"
         gutterBottom
       >
-        Add a New Plant
+        {isEditing ? "Edit Plant" : "Add a New Plant"}
       </Typography>
 
       <form onSubmit={handleSubmit}>
@@ -124,7 +129,7 @@ const PlantForm = ({ setLoggedIn, addPlant }) => {
         </Button>
         <Button
           className={classes.cancel}
-          onClick={() => push("/plants")}
+          onClick={handleCancel}
           color="secondary"
           variant="contained"
         >
@@ -136,7 +141,13 @@ const PlantForm = ({ setLoggedIn, addPlant }) => {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    isEditing: state.isEditing,
+  };
 };
 
-export default connect(mapStateToProps, { setLoggedIn, addPlant })(PlantForm);
+export default connect(mapStateToProps, {
+  setLoggedIn,
+  addPlant,
+  unsetEditing,
+})(PlantForm);

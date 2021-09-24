@@ -8,23 +8,28 @@ import {
   GET_PLANTS_FAIL,
   GET_PLANTS_START,
   GET_PLANTS_SUCCESS,
+  SET_EDITING,
   SET_LOGGED_IN,
   SET_LOGGED_OUT,
+  UNSET_EDITING,
 } from "../actions";
 
-const initialState = {
-  plants: [],
-  isLoggedIn: false,
-  loadingPlants: false,
-  plantsError: "",
-  deletingPlant: false,
-  deletePlantError: "",
-  loadingLogin: false,
-  addingPlant: false,
-  addPlantError: "",
+const initialState = () => {
+  return {
+    plants: [],
+    isLoggedIn: false,
+    loadingPlants: false,
+    plantsError: "",
+    deletingPlant: false,
+    deletePlantError: "",
+    loadingLogin: false,
+    addingPlant: false,
+    addPlantError: "",
+    isEditing: false,
+  };
 };
 
-export const appReducer = (state = initialState, action) => {
+export const appReducer = (state = initialState(), action) => {
   switch (action.type) {
     case SET_LOGGED_IN:
       return { ...state, isLoggedIn: true };
@@ -77,6 +82,16 @@ export const appReducer = (state = initialState, action) => {
         ...state,
         addPlantError: "Error adding plant, please try again",
         addingPlant: false,
+      };
+    case SET_EDITING:
+      return {
+        ...state,
+        isEditing: true,
+      };
+    case UNSET_EDITING:
+      return {
+        ...state,
+        isEditing: false,
       };
     //default case starter
     default:

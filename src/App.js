@@ -49,6 +49,7 @@ function App() {
               <Route path="/register" component={Register} />
               <PrivateRoute path="/plants" component={PlantList} />
               <PrivateRoute path="/plantform" component={PlantForm} />
+              <PrivateRoute path="/plantform/:id" component={PlantForm} />
             </Switch>
           </div>
         </div>

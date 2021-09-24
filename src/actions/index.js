@@ -16,10 +16,11 @@ export const ADD_PLANT_START = "ADD_PLANT_START";
 export const ADD_PLANT_SUCCESS = "ADD_PLANT_SUCCESS";
 export const ADD_PLANT_FAIL = "ADD_PLANT_START";
 
+export const SET_EDITING = "SET_EDITING";
+export const UNSET_EDITING = "UNSET_EDITING";
+
 export const setLoggedIn = () => {
-  return {
-    type: SET_LOGGED_IN,
-  };
+  return { type: SET_LOGGED_IN };
 };
 
 export const setLoggedOut = () => {
@@ -68,4 +69,12 @@ export const addPlant = (newPlant) => (dispatch) => {
       console.log("Add plant fail : ", err);
       dispatch({ type: ADD_PLANT_FAIL, payload: err });
     });
+};
+
+export const setEditing = () => {
+  return { type: SET_EDITING };
+};
+
+export const unsetEditing = () => {
+  return { type: UNSET_EDITING };
 };
