@@ -23,21 +23,30 @@ const useStyles = makeStyles({
   },
 });
 
-const intiialFormValues = {
-  nickname: "",
-  species: "",
-  h2oFrequency: "",
-  description: "",
-};
-
 const PlantForm = (props) => {
-  const { setLoggedIn, addPlant, isEditing, unsetEditing, submitEdit } = props;
+  const { setLoggedIn, addPlant, isEditing, unsetEditing, submitEdit, plants } =
+    props;
 
   const { id } = useParams();
 
+  const intiialFormValues = () => {
+    if (isEditing === true) {
+      const prePopulatedPlant = plants.filter(
+        (plant) => plant.id.toString() === id.toString()
+      );
+      return prePopulatedPlant[0];
+    } else
+      return {
+        nickname: "",
+        species: "",
+        h2oFrequency: "",
+        description: "",
+      };
+  };
+
   const classes = useStyles();
 
-  const [formValues, setFormValues] = useState(intiialFormValues);
+  const [formValues, setFormValues] = useState(intiialFormValues());
 
   const handleChanges = (e) => {
     setFormValues({
@@ -170,6 +179,7 @@ const PlantForm = (props) => {
 const mapStateToProps = (state) => {
   return {
     isEditing: state.isEditing,
+    plants: state.plants,
   };
 };
 
