@@ -16,6 +16,8 @@ const PlantList = (props) => {
     plantsError,
     setLoggedIn,
     editingPlants,
+    addingPlant,
+    deletingPlant,
   } = props;
 
   const breakpoints = {
@@ -40,7 +42,7 @@ const PlantList = (props) => {
         </div>
       )}
       {plantsError && <h3 className="plantsError">{plantsError}</h3>}
-      {editingPlants ? (
+      {editingPlants || addingPlant || deletingPlant ? (
         <div className="loader">
           <FadeLoader size={150} />
         </div>
@@ -67,6 +69,8 @@ const mapStateToProps = (state) => {
     loadingPlants: state.loadingPlants,
     plantsError: state.plantsError,
     editingPlants: state.editingPlants,
+    addingPlant: state.addingPlant,
+    deletingPlant: state.deletingPlant,
   };
 };
 
