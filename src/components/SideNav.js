@@ -11,6 +11,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { AddCircleOutlined, LocalFloristOutlined } from "@material-ui/icons";
 import { useHistory, useLocation } from "react-router";
 import { makeStyles } from "@material-ui/core";
+import { unsetEditing } from "../actions";
 
 export const drawerWidth = 210;
 
@@ -70,7 +71,10 @@ const SideNav = (props) => {
               }
               key={item.text}
               button
-              onClick={() => history.push(item.path)}
+              onClick={() => {
+                props.unsetEditing();
+                history.push(item.path);
+              }}
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
@@ -88,4 +92,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(SideNav);
+export default connect(mapStateToProps, { unsetEditing })(SideNav);

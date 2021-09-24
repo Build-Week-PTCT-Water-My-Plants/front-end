@@ -11,6 +11,8 @@ import {
   SET_EDITING,
   SET_LOGGED_IN,
   SET_LOGGED_OUT,
+  SUBMIT_EDIT_START,
+  SUBMIT_EDIT_SUCCESS,
   UNSET_EDITING,
 } from "../actions";
 
@@ -26,6 +28,7 @@ const initialState = () => {
     addingPlant: false,
     addPlantError: "",
     isEditing: false,
+    loadingEdit: false,
   };
 };
 
@@ -92,6 +95,21 @@ export const appReducer = (state = initialState(), action) => {
       return {
         ...state,
         isEditing: false,
+      };
+    case SUBMIT_EDIT_START:
+      return {
+        ...state,
+        loadingEdit: true,
+      };
+    case SUBMIT_EDIT_SUCCESS:
+      return {
+        ...state,
+        plants: state.plants.map((plant) => {
+          if (plant.id.toString() === action.payload.id.toString()) {
+            return action.payload;
+          } else return plant;
+        }),
+        loadingEdit: false,
       };
     //default case starter
     default:

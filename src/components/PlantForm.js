@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
-import { setLoggedIn, addPlant, unsetEditing } from "../actions";
+import { useParams } from "react-router-dom";
+import { setLoggedIn, addPlant, unsetEditing, submitEdit } from "../actions";
 import { Typography, Button, Container } from "@material-ui/core/";
-import { AddCircle } from "@material-ui/icons";
+import { AddCircle, KeyboardArrowRight } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/";
 import TextField from "@material-ui/core/TextField";
 
@@ -29,7 +30,11 @@ const intiialFormValues = {
   description: "",
 };
 
-const PlantForm = ({ setLoggedIn, addPlant, isEditing, unsetEditing }) => {
+const PlantForm = (props) => {
+  const { setLoggedIn, addPlant, isEditing, unsetEditing, submitEdit } = props;
+
+  const { id } = useParams();
+
   const classes = useStyles();
 
   const [formValues, setFormValues] = useState(intiialFormValues);
@@ -43,10 +48,19 @@ const PlantForm = ({ setLoggedIn, addPlant, isEditing, unsetEditing }) => {
 
   const { push } = useHistory();
 
-  const handleSubmit = (e) => {
+  const handleAdd = (e) => {
     e.preventDefault();
     console.log("submitting...");
     addPlant(formValues);
+    push("/plants");
+  };
+
+  //with real endpoint take out id
+  const handleEdit = (e) => {
+    e.preventDefault();
+    console.log("editing...", id);
+    submitEdit({ ...formValues, id: id });
+    unsetEditing();
     push("/plants");
   };
 
@@ -72,7 +86,7 @@ const PlantForm = ({ setLoggedIn, addPlant, isEditing, unsetEditing }) => {
         {isEditing ? "Edit Plant" : "Add a New Plant"}
       </Typography>
 
-      <form onSubmit={handleSubmit}>
+      <form>
         <TextField
           onChange={handleChanges}
           value={formValues.nickname}
@@ -119,14 +133,27 @@ const PlantForm = ({ setLoggedIn, addPlant, isEditing, unsetEditing }) => {
           rows={4}
           required
         />
-        <Button
-          type="submit"
-          color="secondary"
-          variant="contained"
-          endIcon={<AddCircle color="primary" />}
-        >
-          Add Plant
-        </Button>
+        {isEditing ? (
+          <Button
+            onClick={handleEdit}
+            type="submit"
+            color="secondary"
+            variant="contained"
+            endIcon={<KeyboardArrowRight color="primary" />}
+          >
+            Submit
+          </Button>
+        ) : (
+          <Button
+            onClick={handleAdd}
+            type="submit"
+            color="secondary"
+            variant="contained"
+            endIcon={<AddCircle color="primary" />}
+          >
+            Add Plant
+          </Button>
+        )}
         <Button
           className={classes.cancel}
           onClick={handleCancel}
@@ -150,4 +177,5 @@ export default connect(mapStateToProps, {
   setLoggedIn,
   addPlant,
   unsetEditing,
+  submitEdit,
 })(PlantForm);

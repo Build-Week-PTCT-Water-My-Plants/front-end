@@ -48,8 +48,8 @@ function App() {
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <PrivateRoute path="/plants" component={PlantList} />
-              <PrivateRoute path="/plantform" component={PlantForm} />
               <PrivateRoute path="/plantform/:id" component={PlantForm} />
+              <PrivateRoute path="/plantform" component={PlantForm} />
             </Switch>
           </div>
         </div>

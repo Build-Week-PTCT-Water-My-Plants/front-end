@@ -19,6 +19,10 @@ export const ADD_PLANT_FAIL = "ADD_PLANT_START";
 export const SET_EDITING = "SET_EDITING";
 export const UNSET_EDITING = "UNSET_EDITING";
 
+export const SUBMIT_EDIT_START = "SUBMIT_EDIT_START";
+export const SUBMIT_EDIT_SUCCESS = "SUBMIT_EDIT_SUCCESS";
+export const SUBMIT_EDIT_FAIL = "SUBMIT_EDIT_FAIL";
+
 export const setLoggedIn = () => {
   return { type: SET_LOGGED_IN };
 };
@@ -77,4 +81,19 @@ export const setEditing = () => {
 
 export const unsetEditing = () => {
   return { type: UNSET_EDITING };
+};
+
+export const submitEdit = (updatedPlant) => (dispatch) => {
+  dispatch({ type: SUBMIT_EDIT_START });
+
+  axios
+    .put("https://reqres.in/api/users/2", updatedPlant)
+    .then((res) => {
+      console.log("PUT res: ", res.data);
+      dispatch({ type: SUBMIT_EDIT_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      console.log("PUT err: ", err);
+      dispatch({ type: SUBMIT_EDIT_FAIL, payload: err });
+    });
 };
