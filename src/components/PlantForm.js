@@ -37,6 +37,7 @@ const PlantForm = (props) => {
       return prePopulatedPlant[0];
     } else
       return {
+        id: id,
         nickname: "",
         species: "",
         h2oFrequency: "",
@@ -68,7 +69,7 @@ const PlantForm = (props) => {
   const handleEdit = (e) => {
     e.preventDefault();
     console.log("editing...", id);
-    submitEdit({ ...formValues, id: id });
+    submitEdit(formValues);
     unsetEditing();
     push("/plants");
   };

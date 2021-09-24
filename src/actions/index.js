@@ -1,5 +1,4 @@
 import axios from "axios";
-import dummyData from "../data/dummyData";
 
 export const SET_LOGGED_IN = "SET_LOGGED_IN";
 export const SET_LOGGED_OUT = "SET_LOGGED_OUT";
@@ -35,11 +34,12 @@ export const getPlants = () => (dispatch) => {
   dispatch({ type: GET_PLANTS_START });
 
   //change to axiosWithAuth after login functional with protected route
+  //needs initial data for payload from get request, using dummyData to intialize in reducer
   axios
     .get("https://reqres.in/api/unknown")
     .then((res) => {
       console.log("Get Plants res: ", res);
-      dispatch({ type: GET_PLANTS_SUCCESS, payload: dummyData });
+      dispatch({ type: GET_PLANTS_SUCCESS });
     })
     .catch((err) => {
       console.log("Get Plants err: ", err);

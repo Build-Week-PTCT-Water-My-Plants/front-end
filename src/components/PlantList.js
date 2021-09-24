@@ -9,7 +9,14 @@ import { getPlants, setLoggedIn } from "../actions";
 
 //map over GET request from server to render individual <Plant /> components here
 const PlantList = (props) => {
-  const { plants, getPlants, loadingPlants, plantsError, setLoggedIn } = props;
+  const {
+    plants,
+    getPlants,
+    loadingPlants,
+    plantsError,
+    setLoggedIn,
+    editingPlants,
+  } = props;
 
   const breakpoints = {
     default: 3,
@@ -33,17 +40,23 @@ const PlantList = (props) => {
         </div>
       )}
       {plantsError && <h3 className="plantsError">{plantsError}</h3>}
-      <Masonry
-        breakpointCols={breakpoints}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {plants.map((plant) => (
-          <div key={plant.id}>
-            <Plant plant={plant} />
-          </div>
-        ))}
-      </Masonry>
+      {editingPlants ? (
+        <div className="loader">
+          <FadeLoader size={150} />
+        </div>
+      ) : (
+        <Masonry
+          breakpointCols={breakpoints}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {plants.map((plant) => (
+            <div key={plant.id}>
+              <Plant plant={plant} />
+            </div>
+          ))}
+        </Masonry>
+      )}
     </Container>
   );
 };
@@ -53,6 +66,7 @@ const mapStateToProps = (state) => {
     plants: state.plants,
     loadingPlants: state.loadingPlants,
     plantsError: state.plantsError,
+    editingPlants: state.editingPlants,
   };
 };
 

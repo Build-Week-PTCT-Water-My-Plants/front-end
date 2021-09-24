@@ -11,14 +11,17 @@ import {
   SET_EDITING,
   SET_LOGGED_IN,
   SET_LOGGED_OUT,
+  SUBMIT_EDIT_FAIL,
   SUBMIT_EDIT_START,
   SUBMIT_EDIT_SUCCESS,
   UNSET_EDITING,
 } from "../actions";
 
+import dummyData from "../data/dummyData";
+
 const initialState = () => {
   return {
-    plants: [],
+    plants: dummyData,
     isLoggedIn: false,
     loadingPlants: false,
     plantsError: "",
@@ -28,10 +31,11 @@ const initialState = () => {
     addingPlant: false,
     addPlantError: "",
     isEditing: false,
-    loadingEdit: false,
+    editingPlants: false,
   };
 };
 
+//GET_PLANTS_SUCCESS needs a payload from a real get request, using dummyData to intialize for now
 export const appReducer = (state = initialState(), action) => {
   switch (action.type) {
     case SET_LOGGED_IN:
@@ -43,7 +47,7 @@ export const appReducer = (state = initialState(), action) => {
     case GET_PLANTS_SUCCESS:
       return {
         ...state,
-        plants: action.payload,
+        // plants: action.payload,
         loadingPlants: false,
       };
     case GET_PLANTS_FAIL:
@@ -99,7 +103,7 @@ export const appReducer = (state = initialState(), action) => {
     case SUBMIT_EDIT_START:
       return {
         ...state,
-        loadingEdit: true,
+        editingPlants: true,
       };
     case SUBMIT_EDIT_SUCCESS:
       return {
@@ -109,7 +113,12 @@ export const appReducer = (state = initialState(), action) => {
             return action.payload;
           } else return plant;
         }),
-        loadingEdit: false,
+        editingPlants: false,
+      };
+    case SUBMIT_EDIT_FAIL:
+      return {
+        ...state,
+        editingPlants: false,
       };
     //default case starter
     default:
