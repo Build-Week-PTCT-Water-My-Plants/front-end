@@ -19,7 +19,9 @@ const PlantList = (props) => {
 
   useEffect(() => {
     console.log("PlantList route loaded!");
-    setLoggedIn();
+    if (localStorage.getItem("token")) {
+      setLoggedIn();
+    }
     getPlants();
   }, [getPlants, setLoggedIn]);
 
