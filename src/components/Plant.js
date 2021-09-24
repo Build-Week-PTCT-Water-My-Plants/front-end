@@ -6,11 +6,16 @@ import { DeleteOutlined, EditOutlined } from "@material-ui/icons";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
-import { deletePlant } from "../actions";
+import { deletePlant, setEditing } from "../actions";
+import { useHistory } from "react-router";
 
-const Plant = ({ plant, deletePlant, deletePlantError }) => {
+const Plant = ({ plant, deletePlant, deletePlantError, setEditing }) => {
+  const { push } = useHistory();
+
   const handleEdit = () => {
     console.log("Editing: ", plant.id);
+    setEditing();
+    push(`/plantform/${plant.id}`);
   };
 
   const handleDelete = () => {
@@ -57,4 +62,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { deletePlant })(Plant);
+export default connect(mapStateToProps, { deletePlant, setEditing })(Plant);
