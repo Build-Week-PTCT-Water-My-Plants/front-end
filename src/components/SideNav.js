@@ -15,6 +15,7 @@ import { unsetEditing } from "../actions";
 
 export const drawerWidth = 210;
 
+//figure out media query to adjust side drawer width/content and card container width
 const useStyles = makeStyles((theme) => {
   return {
     drawer: {
@@ -28,6 +29,11 @@ const useStyles = makeStyles((theme) => {
     },
     title: {
       padding: theme.spacing(2),
+    },
+    "@media (max-width: 600px)": {
+      drawerPaper: {
+        width: drawerWidth,
+      },
     },
   };
 });
