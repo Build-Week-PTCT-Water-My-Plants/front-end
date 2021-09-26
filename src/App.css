@@ -22,15 +22,29 @@ body {
   margin-left: -30px; /* gutter size offset */
   width: auto;
 }
+
 .my-masonry-grid_column {
   padding-left: 30px; /* gutter size */
   background-clip: padding-box;
+}
+
+@media (max-width: 600px) {
+  .my-masonry-grid_column {
+    padding-left: 0;
+  }
 }
 
 /* Style individual Plant cards here */
 .my-masonry-grid_column > div {
   /* change div to reference your elements you put in <Masonry> */
   margin-bottom: 30px;
+}
+
+@media (max-width: 600px) {
+  .my-masonry-grid_column > div {
+    margin-bottom: 1px;
+    width: 100%;
+  }
 }
 
 .loader {
