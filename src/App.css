@@ -7,11 +7,6 @@ body {
 }
 
 .App {
-  /* text-align: center;
-  width: 85%;
-  margin: 0 auto;
-  border: 1px solid black;
-  border-radius: 10px; */
   display: flex;
 }
 
@@ -60,4 +55,14 @@ body {
 
 .deletePlantError {
   color: darkred;
+}
+
+.plant-icon-container {
+  display: flex;
+  justify-content: center;
+}
+
+.plant-icon {
+  height: 35%;
+  width: 35%;
 }

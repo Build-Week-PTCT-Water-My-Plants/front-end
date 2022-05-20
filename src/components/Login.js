@@ -24,7 +24,6 @@ const initialCredentials = {
 const Login = ({ setLoggedIn }) => {
   const [credentials, setCredentials] = useState(initialCredentials);
 
-  //still need validation from yup
   const classes = useStyles();
 
   const handleChanges = (e) => {
@@ -36,6 +35,7 @@ const Login = ({ setLoggedIn }) => {
 
   const history = useHistory();
 
+  //change post url back to https://reqres.in/api/login
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -47,7 +47,7 @@ const Login = ({ setLoggedIn }) => {
         history.push("/plants");
       })
       .catch((err) => {
-        console.log("Login fail err : ", err);
+        console.log("Login fail err : ", err.message);
       });
   };
 

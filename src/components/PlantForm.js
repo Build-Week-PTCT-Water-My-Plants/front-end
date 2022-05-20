@@ -29,7 +29,7 @@ const PlantForm = (props) => {
 
   const { id } = useParams();
 
-  const intiialFormValues = () => {
+  const intialFormValues = () => {
     if (isEditing === true) {
       const prePopulatedPlant = plants.filter(
         (plant) => plant.id.toString() === id.toString()
@@ -47,7 +47,7 @@ const PlantForm = (props) => {
 
   const classes = useStyles();
 
-  const [formValues, setFormValues] = useState(intiialFormValues());
+  const [formValues, setFormValues] = useState(intialFormValues());
 
   const handleChanges = (e) => {
     setFormValues({
@@ -65,7 +65,6 @@ const PlantForm = (props) => {
     push("/plants");
   };
 
-  //with real endpoint take out id
   const handleEdit = (e) => {
     e.preventDefault();
     console.log("editing...", id);

@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { deletePlant, setEditing } from "../actions";
 import { useHistory } from "react-router";
+import { randomPlants } from "../data/randomPlantIcons";
 
 const Plant = ({ plant, deletePlant, deletePlantError, setEditing }) => {
   const { push } = useHistory();
@@ -22,6 +23,11 @@ const Plant = ({ plant, deletePlant, deletePlantError, setEditing }) => {
     console.log("Deleting: ", plant.id);
     deletePlant(plant.id);
   };
+
+  const randomPlantIndex =
+    randomPlants[Math.floor(Math.random() * randomPlants.length)];
+
+  console.log("randomPlantIndex", randomPlantIndex);
 
   return (
     <div className="plant">
@@ -43,6 +49,13 @@ const Plant = ({ plant, deletePlant, deletePlantError, setEditing }) => {
             </div>
           }
         />
+        <div className="plant-icon-container">
+          <img
+            src={randomPlantIndex.imageUrl}
+            className="plant-icon"
+            alt="stock plant icon"
+          />
+        </div>
         <CardContent>
           <Typography variant="body1" color="textPrimary">
             Water: {plant.h2oFrequency}

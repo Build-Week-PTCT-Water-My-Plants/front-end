@@ -37,6 +37,7 @@ const Nav = (props) => {
     history.push("/register");
   };
   return (
+    //in MUI AppBar is a <header>
     <AppBar className={classes.appbar} elevation={0} color="secondary">
       <Toolbar>
         <Typography className={classes.nature} color="textSecondary">
